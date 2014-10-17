@@ -15,9 +15,13 @@ public:
 
 	float getIJ(int _i, int _j);
 	void setIJ(int _i, int _j, float _value);
+	float* getI(int _i);
+	float* getJ(int _j);
+
 	void fill(float *_values);
 
 	void add(Matrix &m);
+	void scale(float _s);
 
 	void print();
 

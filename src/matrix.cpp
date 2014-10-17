@@ -35,9 +35,9 @@ void Matrix::setIJ(int _i, int _j, float _value)
 /**
 * Return a copy off the line i
 */
-float[] getI(int _i)
+float* Matrix::getI(int _i)
 {
-	float line[m_n];
+	float *line = new float[m_n];
 
 	for (int j = 0; j < m_n; ++j)
 	{
@@ -50,9 +50,9 @@ float[] getI(int _i)
 /**
 * Return a copy off the column j
 */
-float[] getJ(int _j)
+float* Matrix::getJ(int _j)
 {
-	float column[m_n];
+	float *column = new float[m_n];
 	
 	for (int i = 0; i < m_m; ++i)
 	{
@@ -97,14 +97,14 @@ void Matrix::add(Matrix &m)
 /**
 * Scale the matrix by the scalar s
 */
-void Matrix::scale(float s)
+void Matrix::scale(float _s)
 {
 	float value;
 	for (int i = 0; i < m_m; ++i)
 	{
 		for (int j = 0; j < m_n; ++j)
 		{
-			value = s * getIJ(i, j);
+			value = _s * getIJ(i, j);
 			setIJ(i, j, value);
 		}
 	}
