@@ -4,12 +4,14 @@
 class Matrix
 {
 protected:
+	int m_id;
 	int m_m;
 	int m_n;
 	int m_size;
 	float *m_matrix;
 
-private:
+	static int ID;
+
 	void init(int _m, int _n);
 
 public:
@@ -26,6 +28,7 @@ public:
 	float* getColumn(int _j);
 
 	void fill(float *_values);
+	void fillLine(int _i, float *_values);
 
 	bool equals(Matrix &_b);
 
@@ -34,6 +37,7 @@ public:
 
 	void print();
 
+	static Matrix Zero(int _m, int _n);
 	static Matrix Identity(int _m, int _n);
 
 	static Matrix Transpose(Matrix &_m);

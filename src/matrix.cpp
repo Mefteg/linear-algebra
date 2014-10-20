@@ -2,9 +2,10 @@
 
 #include <iostream>
 
+int Matrix::ID = 0;
+
 Matrix::Matrix()
 {
-	init(0, 0);
 }
 
 Matrix::Matrix(int _m, int _n)
@@ -29,6 +30,9 @@ Matrix::Matrix(Matrix *_m)
 
 void Matrix::init(int _m, int _n)
 {
+	m_id = Matrix::ID;
+	Matrix::ID++;
+
 	m_m = _m;
 	m_n = _n;
 	m_size = m_m * m_n;
@@ -116,6 +120,20 @@ void Matrix::fill(float *_values)
 			value = _values[i * m_n + j];
 			setIJ(i, j, value);
 		}
+	}
+}
+
+/**
+* Fill the matrix with the given values
+*/
+void Matrix::fillLine(int _i, float *_values)
+{
+	float value;
+
+	for (int j = 0; j < m_n; ++j)
+	{
+		value = _values[j];
+		setIJ(_i, j, value);
 	}
 }
 
@@ -210,6 +228,24 @@ void Matrix::print()
 ////////////
 // STATIC //
 ////////////
+
+/**
+* Create and return the matrix zero Zmn
+*/
+Matrix Matrix::Zero(int _m, int _n)
+{
+	Matrix identity(_m, _n);
+
+	for (int i = 0; i < _m; ++i)
+	{
+		for (int j = 0; j < _n; ++j)
+		{
+			identity.setIJ(i, j, 0);
+		}
+	}
+
+	return identity;
+}
 
 /**
 * Create and return the matrix identity Imn

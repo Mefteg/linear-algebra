@@ -30,11 +30,14 @@ log.o:
 
 #-- LIBRARY LINEAR ALGEBRA
 
-liblinearalgebra.a: matrix.o
-	ar -q $(libdir)/liblinearalgebra.a $(tmpdir)/matrix.o
+liblinearalgebra.a: matrix.o matrixaugmented.o
+	ar -q $(libdir)/liblinearalgebra.a $(tmpdir)/*.o
 
 matrix.o:
 	$(CC) -c $(srcdir)/matrix.cpp -I $(includedir) -o $(tmpdir)/matrix.o $(CFLAGS)
+
+matrixaugmented.o:
+	$(CC) -c $(srcdir)/matrixaugmented.cpp -I $(includedir) -o $(tmpdir)/matrixaugmented.o $(CFLAGS)
 
 #-- TMP DIRECTORY
 tmp:

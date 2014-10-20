@@ -1,6 +1,7 @@
-  #include <log.h>
+#include <log.h>
 
-  #include <matrix.h>
+#include <matrix.h>
+#include <matrixaugmented.h>
 
 //////////
 // MAIN //
@@ -9,49 +10,36 @@
 int main() {
 	Log::l("main", "Begin");
 
-	Matrix identity = Matrix::Identity(2, 2);
-
-	Matrix a(2, 2);
-	float values[4] = {0, 1, 2, 3};
-
-	a.fill(values);
-
-	a.add(identity);
-	a.scale(2);
+	//Matrix a(2, 2);
+	//float aValues[4] = {4, 5, 2, 7};
+	Matrix a(4, 4);
+	float aValues[] = {2, -4, 1, -3, 4, 16, -3, 1, 6, -2, -5, 1, -2, -8, 1, -1};
+	a.fill(aValues);
 
 	Log::l("main", "Matrix a");
 	a.print();
 
-	Matrix aCopy(&a);
-
-	Log::l("main", "Matrix aCopy");
-	aCopy.print();
-
-	Matrix aTrans = Matrix::Transpose(a);
-
-	Log::l("main", "Matrix aTrans");
-	aTrans.print();
-
-	Matrix b(2, 1);
-	float *bValues = a.getColumn(0);
+	//Matrix b(2, 1);
+	//float bValues[] = {8, 3};
+	Matrix b(4, 1);
+	float bValues[] = {6, -10, -3, 0};
 	b.fill(bValues);
-	delete[] bValues;
 
 	Log::l("main", "Matrix b");
 	b.print();
 
-	Matrix c = Matrix::Multiply(a, b);
-	Log::l("main", "Matrix c");
-	c.print();
+	MatrixAugmented augmented(&a, &b);
 
-	if (b.equals(c))
-	{
-		Log::l("main", "EQUALS :)");
-	}
-	else
-	{
-		Log::l("main", "NOT EQUALS :(");
-	}
+	Log::l("main", "MatrixAugmented augmented");
+	augmented.print();
+
+	Matrix results = MatrixAugmented::Gauss(augmented);
+	Log::l("main", "Matrix results");
+	results.print();
+
+	Matrix verify = Matrix::Multiply(a, results);
+	Log::l("main", "Matrix verify");
+	verify.print();
 
 	Log::l("main", "End");
 
