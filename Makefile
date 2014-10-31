@@ -41,7 +41,7 @@ matrixaugmented.o:
 
 #-- DIRECTORIES
 directories:
-	mkdir bin lib test tmp
+	mkdir -p bin lib test tmp
 
 ### PHONY ###
 
