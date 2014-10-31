@@ -17,9 +17,10 @@ protected:
 public:
 	Matrix();
 	Matrix(int _m, int _n);
-	Matrix(Matrix *_m);
+	Matrix(Matrix *_matrix);
 	~Matrix();
 
+	int getId();
 	int getM();
 	int getN();
 	float getIJ(int _i, int _j);
@@ -32,7 +33,7 @@ public:
 
 	bool equals(Matrix &_b);
 
-	void add(Matrix &m);
+	void add(Matrix &matrix);
 	void scale(float _s);
 
 	void print();
@@ -40,7 +41,7 @@ public:
 	static Matrix Zero(int _m, int _n);
 	static Matrix Identity(int _m, int _n);
 
-	static Matrix Transpose(Matrix &_m);
+	static Matrix Transpose(Matrix &_matrix);
 
 	static Matrix Multiply(Matrix &_a, Matrix &_b);
 };

@@ -139,7 +139,7 @@ void MatrixAugmented::print()
 
 Matrix MatrixAugmented::Gauss(MatrixAugmented &_m)
 {
-	Matrix results = Matrix::Zero(_m.getM(), _m.getP());
+	Matrix results(Matrix::Zero(_m.getM(), _m.getP()));
 
 	MatrixAugmented copy(&_m);
 	copy.toEchelon();

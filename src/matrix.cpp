@@ -13,16 +13,16 @@ Matrix::Matrix(int _m, int _n)
 	init(_m, _n);
 }
 
-Matrix::Matrix(Matrix *_m)
+Matrix::Matrix(Matrix *_matrix)
 {
-	init(_m->getM(), _m->getN());
+	init(_matrix->getM(), _matrix->getN());
 
 	float value;
 	for (int i = 0; i < m_m; ++i)
 	{
 		for (int j = 0; j < m_n; ++j)
 		{
-			value = _m->getIJ(i, j);
+			value = _matrix->getIJ(i, j);
 			setIJ(i, j, value);
 		}
 	}
@@ -43,6 +43,14 @@ void Matrix::init(int _m, int _n)
 Matrix::~Matrix()
 {
 	delete[] m_matrix;
+}
+
+/**
+* Return the id of the matrix
+*/
+int Matrix::getId()
+{
+	return m_id;
 }
 
 /**
@@ -174,14 +182,14 @@ bool Matrix::equals(Matrix &_b)
 /**
 * Add the matrix m to the matrix
 */
-void Matrix::add(Matrix &m)
+void Matrix::add(Matrix &_m)
 {
 	float value;
 	for (int i = 0; i < m_m; ++i)
 	{
 		for (int j = 0; j < m_n; ++j)
 		{
-			value = getIJ(i, j) + m.getIJ(i, j);
+			value = getIJ(i, j) + _m.getIJ(i, j);
 			setIJ(i, j, value);
 		}
 	}
@@ -234,17 +242,17 @@ void Matrix::print()
 */
 Matrix Matrix::Zero(int _m, int _n)
 {
-	Matrix identity(_m, _n);
+	Matrix zero(_m, _n);
 
 	for (int i = 0; i < _m; ++i)
 	{
 		for (int j = 0; j < _n; ++j)
 		{
-			identity.setIJ(i, j, 0);
+			zero.setIJ(i, j, 0);
 		}
 	}
 
-	return identity;
+	return zero;
 }
 
 /**
@@ -271,10 +279,10 @@ Matrix Matrix::Identity(int _m, int _n)
 	return identity;
 }
 
-Matrix Matrix::Transpose(Matrix &_m)
+Matrix Matrix::Transpose(Matrix &_matrix)
 {
-	int nbLines = _m.getN();
-	int nbColumns = _m.getM();
+	int nbLines = _matrix.getN();
+	int nbColumns = _matrix.getM();
 	Matrix transpose(nbLines, nbColumns);
 
 	float value;
@@ -282,7 +290,7 @@ Matrix Matrix::Transpose(Matrix &_m)
 	{
 		for (int j = 0; j < nbColumns; ++j)
 		{
-			value = _m.getIJ(j, i);
+			value = _matrix.getIJ(j, i);
 			transpose.setIJ(i, j, value);
 		}
 	}
