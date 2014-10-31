@@ -144,39 +144,25 @@ Matrix MatrixAugmented::Gauss(MatrixAugmented &_m)
 	MatrixAugmented copy(&_m);
 	copy.toEchelon();
 
-	copy.print();
-
-	//float lastValue = copy.getIJ((copy.getM() - 1), (copy.getN() - 1));
-	//results.setIJ(results.getM() - 1, results.getN() - 1, lastValue);
-
 	int nbLines = copy.getM();
 	int nbCoeffPerLine = copy.getN() - copy.getP();
 
 	// for each row (from the bottom to the top)
 	for (int i = (nbLines - 1); i >= 0; --i)
 	{
-		Log::l("MatrixAugmented::Gauss", "line");
-		std::cout << i << std::endl;
-
 		float value = 0;
 		// protection against division by zero
 		if (copy.getIJ(i, i) != 0) {
 			// for each coeff except the one on the diagonal
 			for (int k = (i + 1); k < nbCoeffPerLine; ++k)
 			{
-				Log::l("MatrixAugmented::Gauss", "col");
-				std::cout << k << " : " << copy.getIJ(i, k) << " * " << results.getIJ(k, 0) << std::endl;
 				// add the value off each variable scale by its coefficient
 				value += copy.getIJ(i, k) * results.getIJ(k, 0);
 			}
 			// substract to the constant
 			value = copy.getIJ(i, (nbCoeffPerLine)) - value;
-			Log::l("MatrixAugmented::Gauss", "constant");
-			std::cout << copy.getIJ(i, (nbCoeffPerLine)) << std::endl;
 			// divide by the coefficient of the variable on the diagonal
 			value = value / copy.getIJ(i, i);
-			Log::l("MatrixAugmented::Gauss", "value");
-			std::cout << value << std::endl;
 		}
 		// store the result
 		results.setIJ(i, 0, value);

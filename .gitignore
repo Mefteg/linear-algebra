@@ -1,2 +1,4 @@
 # ignore all files in tmp (like *.o)
 tmp/*
+# ignore the main file
+bin/main
