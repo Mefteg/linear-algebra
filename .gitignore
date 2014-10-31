@@ -1,4 +1,8 @@
 # ignore all files in tmp (like *.o)
-tmp/*
+tmp/*.o
+
+# ignore all files in lib (like *.a)
+lib/*.a
+
 # ignore the main file
 bin/main
