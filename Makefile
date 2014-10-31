@@ -14,7 +14,7 @@ tmpdir = $(prefix)/tmp
 
 #-- MAIN
 
-main: tmp liblog.a liblinearalgebra.a main.o
+main: directories liblog.a liblinearalgebra.a main.o
 	$(CC) $(tmpdir)/main.o -L$(libdir) -llog -llinearalgebra -o $(bindir)/main
 
 main.o: 
@@ -39,9 +39,9 @@ matrix.o:
 matrixaugmented.o:
 	$(CC) -c $(srcdir)/matrixaugmented.cpp -I $(includedir) -o $(tmpdir)/matrixaugmented.o $(CFLAGS)
 
-#-- TMP DIRECTORY
-tmp:
-	mkdir tmp
+#-- DIRECTORIES
+directories:
+	mkdir bin lib test tmp
 
 ### PHONY ###
 
